@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./index.scss";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../../actions/auth";
@@ -42,6 +43,9 @@ const LandingPage = ({ login, isAuthenticated }) => {
           />
           <button>Log in</button>
         </form>
+        <p>
+          Don't have an account? <Link to="/register">Sign Up</Link>
+        </p>
       </div>
     </div>
   );

@@ -23,18 +23,23 @@
     }
 
     form {
-      height: 5rem;
       width: 100%;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-around;
 
       input {
-        height: 100%;
         width: 45%;
-        border-radius: 1rem;
-        font-size: 2rem;
-        padding-left: 1rem;
       }
+
+      button {
+        width: 30%;
+        margin-top: 5rem;
+      }
+    }
+
+    p:last-of-type {
+      margin-bottom: 0;
     }
   }
 }

@@ -16,3 +16,29 @@ img {
   width: 85%;
   margin: 0 auto;
 }
+
+button {
+  font-size: 2rem;
+  background-color: white;
+  padding: 1.5rem;
+  border: 2px solid rgb(29, 161, 242);
+  border-radius: 1rem;
+  box-shadow: 0 0.7rem 0 rgb(29, 161, 242);
+  transition: all 0.2s;
+  position: relative;
+  top: 0;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    top: 0.35rem;
+    box-shadow: 0 0.35rem 0 rgb(29, 161, 242);
+  }
+}
+
+input {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  font-size: 2rem;
+  border: 2px solid rgb(29, 161, 242);
+}

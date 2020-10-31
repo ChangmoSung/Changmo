@@ -19,19 +19,14 @@ router.post(
   ],
   async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    if (!errors.isEmpty()) res.status(400).json({ errors: errors.array() });
 
     const { name, email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
-      if (user) {
-        return res
-          .status(400)
-          .json({ error: [{ msg: "This user already exists" }] });
-      }
+      if (user)
+        res.status(400).json({ error: [{ msg: "This user already exists" }] });
 
       const salt = await bcrypt.genSalt(10);
 
@@ -56,7 +51,7 @@ router.post(
       );
     } catch ({ message = "", reason = "" }) {
       console.error("users router /", message || reason);
-      res.status(500).send("Server error");
+      res.status(500).send("Server error - users router");
     }
   }
 );

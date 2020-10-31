@@ -1,0 +1,40 @@
+.landingPage {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .landingPageTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 5%;
+    border: 2px solid rgb(29, 161, 242);
+    border-radius: 1rem;
+
+    h1 {
+      margin: 0;
+      font-size: 4.5rem;
+    }
+
+    p {
+      font-size: 2.5rem;
+      margin: 5rem 0;
+    }
+
+    form {
+      height: 5rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+      input {
+        height: 100%;
+        width: 45%;
+        border-radius: 1rem;
+        font-size: 2rem;
+        padding-left: 1rem;
+      }
+    }
+  }
+}

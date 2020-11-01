@@ -1,16 +1,13 @@
-import React, { Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./components/styles/styles.scss";
+import NavBar from "./components/layout/NavBar/index.js";
 import LandingPage from "./components/layout/LandingPage/index.js";
+import MainPage from "./components/layout/MainPage/index.js";
 
-import { Provider } from "react-redux";
 import store from "./store";
+import { Provider } from "react-redux";
 import { loadUser } from "./actions/auth";
-import setAuthToken from "./utils/setAuthToken";
-
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
 
 const App = () => {
   useEffect(() => {
@@ -20,9 +17,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
-          <Route exact path="/" component={LandingPage}></Route>
-        </Fragment>
+        <NavBar />
+        <Route exact path="/" component={LandingPage} />
+        <Switch>
+          <Route exact path="/mainPage" component={MainPage} />
+        </Switch>
       </Router>
     </Provider>
   );

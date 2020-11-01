@@ -1,16 +1,17 @@
+@import "../../styles/variables";
+
 .landingPage {
   display: flex;
   align-items: center;
-  height: 100%;
 
-  .landingPageTitle {
+  .landingPageContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50%;
     padding: 5%;
-    border: 2px solid rgb(29, 161, 242);
-    border-radius: 1rem;
+    border: $primaryBorder;
+    border-radius: $primaryBorderRadius;
 
     h1 {
       margin: 0;
@@ -18,7 +19,7 @@
     }
 
     p {
-      font-size: 2.5rem;
+      font-size: $primaryFontSize;
       margin: 5rem 0;
     }
 

@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+nav {
+  position: fixed;
+  top: 3rem;
+  width: 100%;
+
+  ul {
+    display: flex;
+    padding-left: 0;
+    justify-content: space-around;
+    list-style: none;
+    font-size: $primaryFontSize;
+    margin-top: 2rem;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}

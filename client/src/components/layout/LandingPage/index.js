@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./index.scss";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../../actions/auth";
@@ -21,9 +21,11 @@ const LandingPage = ({ login, isAuthenticated }) => {
     login(email, password);
   };
 
+  if (isAuthenticated) return <Redirect to="/mainPage" />;
+
   return (
-    <div className="landingPage">
-      <div className="wrapper landingPageTitle">
+    <div className="container landingPage">
+      <div className="wrapper landingPageContainer">
         <h1>Welcome to Changmo's world!</h1>
         <p>I hope you'll have a wonderful day :)</p>
         <form onSubmit={onSubmit}>

@@ -1,0 +1,20 @@
+.mainPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .mainPageContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .appContainer {
+      display: flex;
+      justify-content: space-between;
+
+      .appImage {
+        width: 30%;
+      }
+    }
+  }
+}

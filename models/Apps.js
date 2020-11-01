@@ -1,20 +1,20 @@
 const mongoose = require("mongoose");
 
-module.exports = User = mongoose.model(
-  "users",
+module.exports = Apps = mongoose.model(
+  "apps",
   new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
+    appName: {
       type: String,
       required: true,
       unique: true,
     },
-    password: {
+    fileName: {
       type: String,
       required: true,
+    },
+    fileUrl: {
+      type: String,
+      unique: true,
     },
     date: {
       type: Date,

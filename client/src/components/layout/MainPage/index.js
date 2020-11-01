@@ -1,47 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "./index.scss";
-import S3 from "aws-sdk/clients/s3";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getApps } from "../../../actions/apps";
 
-const MainPage = () => {
-  const [appImages, setAppImages] = useState([]);
-
-  const imagesToRender = appImages.map((url) => (
-    <div class="appImage">
-      <img src={url}></img>
-    </div>
-  ));
-
+const MainPage = ({ getApps, apps }) => {
   useEffect(() => {
-    const {
-      REACT_APP_AWS_ACCESS_KEY_ID: accessKeyId,
-      REACT_APP_AWS_SECRET_ACCESS_KEY: secretAccessKey,
-      REACT_APP_AWS_REGION: region,
-      REACT_APP_AWS_S3_APP_IMAGES_BUCKET: Bucket,
-    } = process.env;
-
-    const s3 = new S3({
-      accessKeyId,
-      secretAccessKey,
-      region,
-    });
-    const appImages = ["magicLand.png", "ChangmoSung.png", "smileyMagic.png"];
-    const appImageUrls = appImages.map((url) =>
-      s3.getSignedUrl("getObject", {
-        Bucket,
-        Key: url,
-      })
-    );
-    setAppImages(appImageUrls);
-  }, []);
+    getApps();
+  }, [getApps]);
 
   return (
     <div className="container mainPage">
       <div className=" wrapper mainPageContainer">
         <h1>Welcome!</h1>
-        <div className="appContainer">{imagesToRender}</div>
+        <div className="appContainer">
+          {apps.map(({ appName, fileUrl }, i) => (
+            <div key={i} className="appImage">
+              <img src={fileUrl} alt={appName} />
+              <p>{appName}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default MainPage;
+MainPage.propTypes = {
+  getApps: PropTypes.func.isRequired,
+  apps: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  apps: state.apps.apps,
+});
+
+export default connect(mapStateToProps, { getApps })(MainPage);

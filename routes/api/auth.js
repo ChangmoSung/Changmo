@@ -6,11 +6,11 @@ const config = require("config");
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 
-const User = require("../../models/User");
+const Users = require("../../models/Users");
 
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await Users.findById(req.user.id).select("-password");
     res.json(user);
   } catch ({ message = "", reason = "" }) {
     console.error(message || reason);
@@ -31,7 +31,7 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await Users.findOne({ email });
 
       if (!user)
         res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
@@ -58,7 +58,7 @@ router.post(
       );
     } catch ({ message = "", reason = "" }) {
       console.error(message || reason);
-      res.status(500).send("Server error");
+      res.status(500).send("Server error - Auth router");
     }
   }
 );

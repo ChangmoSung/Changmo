@@ -53,7 +53,7 @@ const LandingPage = ({ login, isAuthenticated }) => {
   );
 };
 
-login.propTypes = {
+LandingPage.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };

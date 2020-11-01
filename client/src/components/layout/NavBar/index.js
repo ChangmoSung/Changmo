@@ -7,19 +7,10 @@ const NavBar = () => {
     <nav>
       <ul className="wrapper">
         <li>
-          <Link to="/">HOME</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/">ABOUT</Link>
-        </li>
-        <li>
-          <Link to="/">APP1</Link>
-        </li>
-        <li>
-          <Link to="/">APP2</Link>
-        </li>
-        <li>
-          <Link to="/">APP3</Link>
+          <Link to="/addAppsPage">Add apps</Link>
         </li>
       </ul>
     </nav>

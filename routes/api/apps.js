@@ -8,19 +8,20 @@ router.post(
   "/",
   [
     check("appName", "App name is required").not().isEmpty(),
+    check("appUrl", "App url is required").not().isEmpty(),
     check("fileName", "File name is required").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) res.status(400).json({ errors: errors.array() });
 
-    const { appName, fileName, fileUrl = "" } = req.body;
+    const { appName, appUrl, fileName, fileUrl = "" } = req.body;
 
     let app = await Apps.findOne({ appName });
     if (app)
       res.status(400).json({ error: [{ msg: "This app already exists" }] });
 
-    app = new Apps({ appName, fileName, fileUrl });
+    app = new Apps({ appName, appUrl, fileName, fileUrl });
 
     await app.save();
 

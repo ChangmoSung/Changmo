@@ -1,0 +1,39 @@
+@import "../../styles/variables";
+
+.addAppsPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .addAppsPageContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 5%;
+    border: $primaryBorder;
+    border-radius: $primaryBorderRadius;
+
+    h1 {
+      margin: 0 0 5rem;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      input {
+        width: 45%;
+
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+          margin: 5rem 0;
+        }
+      }
+
+      button {
+        width: 25%;
+      }
+    }
+  }
+}

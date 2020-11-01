@@ -1,4 +1,4 @@
-import { GET_APPS, APPS_ERROR } from "../actions/types";
+import { GET_APPS, ADD_APPS, APPS_ERROR } from "../actions/types";
 
 const initialState = {
   apps: [],
@@ -15,6 +15,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         apps: payload,
+        loading: false,
+      };
+    case ADD_APPS:
+      return {
+        ...state,
+        apps: [payload, ...state.apps],
         loading: false,
       };
     case APPS_ERROR:

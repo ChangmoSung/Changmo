@@ -8,6 +8,11 @@ module.exports = Apps = mongoose.model(
       required: true,
       unique: true,
     },
+    appUrl: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     fileName: {
       type: String,
       required: true,

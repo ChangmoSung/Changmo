@@ -1,20 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     <nav>
       <ul className="wrapper">
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to="/addAppsPage">Add apps</Link>
-        </li>
+        {user && user.role === "admin" && (
+          <li>
+            <Link to="/addAppsPage">Add apps</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
 };
 
-export default NavBar;
+NavBar.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps)(NavBar);

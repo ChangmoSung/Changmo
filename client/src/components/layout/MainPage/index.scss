@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .mainPage {
   display: flex;
   justify-content: center;
@@ -7,13 +9,26 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+    border-radius: $primaryBorderRadius;
+    border: $primaryBorder;
+    padding: 3%;
 
     .appContainer {
       display: flex;
       justify-content: space-between;
 
       .appImage {
-        width: 30%;
+        width: 25%;
+
+        img {
+          height: 80%;
+        }
+
+        p {
+          font-size: $primaryFontSize;
+          text-align: center;
+          height: 15%;
+        }
       }
     }
   }

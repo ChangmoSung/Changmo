@@ -6,8 +6,11 @@ export const getApps = () => async (dispatch) => {
     const res = await axios.get("/apps");
 
     dispatch({ type: GET_APPS, payload: res.data });
-  } catch (error) {
-    dispatch({ type: APPS_ERROR });
+  } catch (err) {
+    dispatch({
+      type: APPS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };
 
@@ -22,8 +25,11 @@ export const addApps = (formData) => async (dispatch) => {
     const res = await axios.post("/apps", formData, config);
 
     dispatch({ type: ADD_APPS, payload: res.data });
-  } catch (error) {
-    dispatch({ type: APPS_ERROR });
+  } catch (err) {
+    dispatch({
+      type: APPS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };
 
@@ -32,7 +38,10 @@ export const removeApps = (appId) => async (dispatch) => {
     await axios.delete(`/apps/${appId}`);
 
     dispatch({ type: REMOVE_APPS, payload: appId });
-  } catch ({ message = "", reason = "" }) {
-    dispatch({ type: APPS_ERROR });
+  } catch (err) {
+    dispatch({
+      type: APPS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };

@@ -44,4 +44,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const app = await Apps.findById(req.params.id);
+
+    if (!app) res.status(404).json({ msg: "Post not found" });
+
+    await app.remove();
+
+    res.json({ msg: "App removed" });
+  } catch ({ message = "", reason = "" }) {
+    console.error(message || reason);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

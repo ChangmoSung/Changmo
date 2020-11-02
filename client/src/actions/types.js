@@ -5,3 +5,4 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const GET_APPS = "GET_APPS";
 export const ADD_APPS = "ADD_APPS";
 export const APPS_ERROR = "APPS_ERROR";
+export const REMOVE_APPS = "REMOVE_APPS";

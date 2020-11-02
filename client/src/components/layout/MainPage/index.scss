@@ -13,6 +13,11 @@
     border: $primaryBorder;
     padding: 3%;
 
+    h1 {
+      font-size: 4.5rem;
+      margin-top: 0;
+    }
+
     .appContainer {
       display: flex;
       justify-content: space-between;
@@ -21,13 +26,18 @@
         width: 25%;
 
         img {
-          height: 80%;
+          height: 22vmax;
         }
 
         p {
           font-size: $primaryFontSize;
           text-align: center;
-          height: 15%;
+        }
+
+        button {
+          display: block;
+          margin: 0 auto;
+          height: 60px;
         }
       }
     }

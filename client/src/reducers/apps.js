@@ -1,4 +1,4 @@
-import { GET_APPS, ADD_APPS, APPS_ERROR } from "../actions/types";
+import { GET_APPS, ADD_APPS, REMOVE_APPS, APPS_ERROR } from "../actions/types";
 
 const initialState = {
   apps: [],
@@ -21,6 +21,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         apps: [payload, ...state.apps],
+        loading: false,
+      };
+    case REMOVE_APPS:
+      return {
+        ...state,
+        apps: state.apps.filter(({ _id }) => _id !== payload),
         loading: false,
       };
     case APPS_ERROR:

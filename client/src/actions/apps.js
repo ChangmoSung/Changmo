@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_APPS, ADD_APPS, APPS_ERROR } from "./types.js";
+import { GET_APPS, ADD_APPS, REMOVE_APPS, APPS_ERROR } from "./types.js";
 
 export const getApps = () => async (dispatch) => {
   try {
@@ -23,6 +23,16 @@ export const addApps = (formData) => async (dispatch) => {
 
     dispatch({ type: ADD_APPS, payload: res.data });
   } catch (error) {
+    dispatch({ type: APPS_ERROR });
+  }
+};
+
+export const removeApps = (appId) => async (dispatch) => {
+  try {
+    await axios.delete(`/apps/${appId}`);
+
+    dispatch({ type: REMOVE_APPS, payload: appId });
+  } catch ({ message = "", reason = "" }) {
     dispatch({ type: APPS_ERROR });
   }
 };

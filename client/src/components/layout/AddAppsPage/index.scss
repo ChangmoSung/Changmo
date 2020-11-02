@@ -14,25 +14,22 @@
     border-radius: $primaryBorderRadius;
 
     h1 {
+      font-size: 4.5rem;
       margin: 0 0 5rem;
     }
 
     form {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
+      flex-direction: column;
+      align-items: center;
 
       input {
-        width: 45%;
-
-        &:nth-of-type(3),
-        &:nth-of-type(4) {
-          margin: 5rem 0;
-        }
+        width: 100%;
+        margin-bottom: 5rem;
       }
 
       button {
-        width: 25%;
+        width: 40%;
       }
     }
   }

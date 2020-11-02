@@ -10,6 +10,7 @@ router.post(
     check("appName", "App name is required").not().isEmpty(),
     check("appUrl", "App url is required").not().isEmpty(),
     check("fileName", "File name is required").not().isEmpty(),
+    check("fileUrl", "File url is required").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);

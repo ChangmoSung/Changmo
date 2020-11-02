@@ -23,8 +23,6 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
     getApps();
   }, [getApps]);
 
-  if (!isAuthenticated) return <Redirect to="/" />;
-
   const onClick = (_id, fileName) => {
     removeApps(_id);
     s3.deleteObject({ Bucket, Key: fileName }, (err, data) => {
@@ -32,6 +30,8 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
       else console.log(data);
     });
   };
+
+  if (!isAuthenticated) return <Redirect to="/" />;
 
   return (
     <div className="container mainPage">

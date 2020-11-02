@@ -4,8 +4,8 @@ import "./index.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const NavBar = ({ user }) => {
-  return (
+const NavBar = ({ user }) =>
+  user && (
     <nav>
       <ul className="wrapper">
         <li>
@@ -19,7 +19,6 @@ const NavBar = ({ user }) => {
       </ul>
     </nav>
   );
-};
 
 NavBar.propTypes = {
   user: PropTypes.object,

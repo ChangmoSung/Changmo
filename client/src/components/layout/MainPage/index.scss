@@ -15,29 +15,54 @@
 
     h1 {
       font-size: 4.5rem;
-      margin-top: 0;
+      margin: 0 0 6rem;
     }
 
     .appContainer {
       display: flex;
       justify-content: space-between;
 
-      .appImage {
+      .app {
         width: 25%;
 
-        img {
-          height: 22vmax;
+        .appImage {
+          position: relative;
+
+          i {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            color: $primaryBlue;
+            font-size: $primaryFontSize;
+            cursor: pointer;
+          }
+
+          img {
+            height: 22vmax;
+          }
+
+          .optionButtons {
+            position: absolute;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            border: $primaryBorder;
+
+            &.show {
+              display: flex;
+            }
+          }
         }
 
         p {
           font-size: $primaryFontSize;
           text-align: center;
-        }
-
-        button {
-          display: block;
-          margin: 0 auto;
-          height: 60px;
+          line-height: 3rem;
         }
       }
     }

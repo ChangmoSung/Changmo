@@ -15,8 +15,14 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
   const [appInfo, setAppInfo] = useState({});
 
   const onClick = (_id, fileName) => {
-    removeApps(_id);
-    deleteS3Object(fileName);
+    const answer = window.confirm(
+      "Are you sure you want to permanently delete the app?"
+    );
+
+    if (answer) {
+      removeApps(_id);
+      deleteS3Object(fileName);
+    }
   };
 
   if (!isAuthenticated) return <Redirect to="/" />;
@@ -27,13 +33,21 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
         <h1>Welcome!</h1>
         <div className="appContainer">
           {apps.map(({ _id, appName, fileUrl, fileName }, i) => (
-            <div key={i} className="appImage">
-              <img src={fileUrl} alt={appName} />
+            <div key={i} className="app">
+              <div className="appImage">
+                <img src={fileUrl} alt={appName} />
+                <i
+                  className="fas fa-cog"
+                  onClick={(e) => e.target.nextSibling.classList.toggle("show")}
+                ></i>
+                <div className="optionButtons">
+                  <button onClick={() => setAppInfo({ appId: _id, fileName })}>
+                    Edit
+                  </button>
+                  <button onClick={() => onClick(_id, fileName)}>Remove</button>
+                </div>
+              </div>
               <p>{appName}</p>
-              <button onClick={() => setAppInfo({ appId: _id, fileName })}>
-                Edit
-              </button>
-              <button onClick={() => onClick(_id, fileName)}>Remove</button>
             </div>
           ))}
         </div>

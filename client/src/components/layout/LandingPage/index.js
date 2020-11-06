@@ -11,14 +11,12 @@ const LandingPage = ({ login, isAuthenticated }) => {
     password: "",
   });
 
-  const { email, password } = formData;
-
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
+    login("test@gmail.com", "test123");
   };
 
   if (isAuthenticated) return <Redirect to="/mainPage" />;
@@ -34,14 +32,12 @@ const LandingPage = ({ login, isAuthenticated }) => {
             name="email"
             onChange={onChange}
             placeholder="Email"
-            required
           />
           <input
             type="password"
             name="password"
             onChange={onChange}
             placeholder="Password"
-            required
           />
           <button>Log in</button>
         </form>

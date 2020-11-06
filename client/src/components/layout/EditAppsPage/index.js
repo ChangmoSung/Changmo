@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./index.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -74,6 +74,8 @@ const EditAppsPage = ({
     } else {
       alert("Enter value");
     }
+
+    setAppInfo({});
   };
 
   return (

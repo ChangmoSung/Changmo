@@ -1,5 +1,11 @@
 import axios from "axios";
-import { GET_APPS, ADD_APPS, REMOVE_APPS, APPS_ERROR } from "./types.js";
+import {
+  GET_APPS,
+  ADD_APPS,
+  UPDATE_APPS,
+  REMOVE_APPS,
+  APPS_ERROR,
+} from "./types.js";
 
 export const getApps = () => async (dispatch) => {
   try {
@@ -25,6 +31,25 @@ export const addApps = (formData) => async (dispatch) => {
     const res = await axios.post("/apps", formData, config);
 
     dispatch({ type: ADD_APPS, payload: res.data });
+  } catch (err) {
+    dispatch({
+      type: APPS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const updateApps = (appId, formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const res = await axios.put(`/apps/${appId}`, formData, config);
+
+    dispatch({ type: UPDATE_APPS, payload: res.data });
   } catch (err) {
     dispatch({
       type: APPS_ERROR,

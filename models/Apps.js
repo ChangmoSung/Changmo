@@ -20,7 +20,6 @@ module.exports = Apps = mongoose.model(
     fileUrl: {
       type: String,
       required: true,
-      unique: true,
     },
     date: {
       type: Date,

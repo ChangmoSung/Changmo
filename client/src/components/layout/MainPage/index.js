@@ -1,52 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getApps, removeApps } from "../../../actions/apps";
-import S3 from "aws-sdk/clients/s3";
-const {
-  REACT_APP_AWS_ACCESS_KEY_ID: accessKeyId,
-  REACT_APP_AWS_SECRET_ACCESS_KEY: secretAccessKey,
-  REACT_APP_AWS_REGION: region,
-  REACT_APP_AWS_S3_APP_IMAGES_BUCKET: Bucket,
-} = process.env;
-const s3 = new S3({
-  apiVersion: "2006-03-01",
-  accessKeyId,
-  secretAccessKey,
-  region,
-});
+import deleteS3Object from "../../../utils/deleteS3Object";
+import EditAppsPage from "../EditAppsPage/index.js";
 
 const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
   useEffect(() => {
     getApps();
   }, [getApps]);
 
+  const [appInfo, setAppInfo] = useState({});
+
   const onClick = (_id, fileName) => {
     removeApps(_id);
-    s3.deleteObject({ Bucket, Key: fileName }, (err, data) => {
-      if (err) throw err;
-      else console.log(data);
-    });
+    deleteS3Object(fileName);
   };
 
   if (!isAuthenticated) return <Redirect to="/" />;
 
   return (
-    <div className="container mainPage">
-      <div className=" wrapper mainPageContainer">
+    <div className={`container mainPage ${appInfo.appId && "disableMainPage"}`}>
+      <div className="wrapper mainPageContainer">
         <h1>Welcome!</h1>
         <div className="appContainer">
           {apps.map(({ _id, appName, fileUrl, fileName }, i) => (
             <div key={i} className="appImage">
               <img src={fileUrl} alt={appName} />
               <p>{appName}</p>
+              <button onClick={() => setAppInfo({ appId: _id, fileName })}>
+                Edit
+              </button>
               <button onClick={() => onClick(_id, fileName)}>Remove</button>
             </div>
           ))}
         </div>
       </div>
+      {appInfo.appId && (
+        <EditAppsPage appInfo={appInfo} setAppInfo={setAppInfo} />
+      )}
     </div>
   );
 };

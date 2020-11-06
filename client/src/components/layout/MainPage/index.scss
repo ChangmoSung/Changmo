@@ -42,4 +42,14 @@
       }
     }
   }
+
+  .editAppsPageContainer {
+    position: absolute;
+    width: 50%;
+    background-color: white;
+  }
+
+  &.disableMainPage {
+    background-color: grey;
+  }
 }

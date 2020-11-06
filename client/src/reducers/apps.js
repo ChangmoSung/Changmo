@@ -1,4 +1,10 @@
-import { GET_APPS, ADD_APPS, REMOVE_APPS, APPS_ERROR } from "../actions/types";
+import {
+  GET_APPS,
+  ADD_APPS,
+  UPDATE_APPS,
+  REMOVE_APPS,
+  APPS_ERROR,
+} from "../actions/types";
 
 const initialState = {
   apps: [],
@@ -21,6 +27,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         apps: [payload, ...state.apps],
+        loading: false,
+      };
+    case UPDATE_APPS:
+      return {
+        ...state,
+        apps: state.apps.map((app) =>
+          app._id === payload._id ? payload : app
+        ),
         loading: false,
       };
     case REMOVE_APPS:

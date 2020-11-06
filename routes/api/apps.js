@@ -45,6 +45,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const app = await Apps.findById(req.params.id);
+    const { appName = "", appUrl = "", fileName = "", fileUrl = "" } = req.body;
+
+    if (appName) app.appName = appName;
+    if (appUrl) app.appUrl = appUrl;
+    if (fileName) app.fileName = fileName;
+    if (fileUrl) app.fileUrl = fileUrl;
+
+    await app.save();
+
+    res.json(app);
+  } catch ({ message = "", reason = "" }) {
+    console.error(message || reason);
+    res.status(500).send("Server error");
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const app = await Apps.findById(req.params.id);

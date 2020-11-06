@@ -39,6 +39,11 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
                 <i
                   className="fas fa-cog"
                   onClick={(e) => e.target.nextSibling.classList.toggle("show")}
+                  onKeyDown={(e) =>
+                    e.keyCode === 13 &&
+                    e.target.nextSibling.classList.toggle("show")
+                  }
+                  tabIndex="0"
                 ></i>
                 <div className="optionButtons">
                   <button onClick={() => setAppInfo({ appId: _id, fileName })}>

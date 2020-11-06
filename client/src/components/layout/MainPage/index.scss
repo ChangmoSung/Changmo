@@ -30,11 +30,17 @@
 
           i {
             position: absolute;
-            top: -3rem;
+            top: -4rem;
             right: 0;
             color: $primaryBlue;
-            font-size: $primaryFontSize;
+            font-size: 3.5rem;
+            transition: all 1.5s;
             cursor: pointer;
+
+            &:hover,
+            &:focus {
+              transform: rotate(720deg);
+            }
           }
 
           img {

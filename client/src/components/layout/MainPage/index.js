@@ -45,7 +45,7 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
                   }
                   tabIndex="0"
                 ></i>
-                <div className="optionButtons">
+                <div className={`optionButtons ${!appInfo.appId && "hidden"}`}>
                   <button onClick={() => setAppInfo({ appId: _id, fileName })}>
                     Edit
                   </button>

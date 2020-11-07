@@ -21,7 +21,7 @@ const s3 = new S3({
 
 const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
   const formEl = useRef(null);
-  const [appAdded, toggleAppAdded] = useState(false);
+  const [goBack, toggleGoBack] = useState(false);
   const [formData, setFormData] = useState({
     appName: "",
     appUrl: "",
@@ -60,7 +60,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
             addApps(formDataToSend);
 
             const answer = window.confirm("Would you like to add more apps?");
-            if (!answer) toggleAppAdded(true);
+            if (!answer) toggleGoBack(true);
           }
         }
       );
@@ -70,7 +70,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
   };
 
   if (!isAuthenticated) return <Redirect to="/" />;
-  if (appAdded) return <Redirect to="/mainPage" />;
+  if (goBack) return <Redirect to="/mainPage" />;
 
   return (
     <div className="container addAppsPage">
@@ -97,7 +97,12 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <button>Add</button>
+          <div className="buttonContainer">
+            <button>Add</button>
+            <button type="button" onClick={() => toggleGoBack(true)}>
+              Go back
+            </button>
+          </div>
         </form>
       </div>
     </div>

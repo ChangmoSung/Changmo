@@ -28,8 +28,14 @@
         margin-bottom: 5rem;
       }
 
-      button {
-        width: 40%;
+      .buttonContainer {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+
+        button {
+          width: 40%;
+        }
       }
     }
   }

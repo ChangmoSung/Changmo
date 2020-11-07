@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./index.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 import { updateApps } from "../../../actions/apps";
 import deleteS3Object from "../../../utils/deleteS3Object";
 
@@ -53,7 +54,7 @@ const EditAppsPage = ({
         {
           Bucket,
           Body: appImageFile,
-          Key: appImageFile.name,
+          Key: `${appImageFile.name}-${uuidv4()}`,
           ACL: "public-read",
         },
         (err, data) => {

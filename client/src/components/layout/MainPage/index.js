@@ -18,7 +18,6 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
     const answer = window.confirm(
       "Are you sure you want to permanently delete the app?"
     );
-
     if (answer) {
       removeApps(_id);
       deleteS3Object(fileName);

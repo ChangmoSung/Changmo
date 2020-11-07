@@ -3,6 +3,7 @@ import "./index.scss";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 import { addApps } from "../../../actions/apps";
 import S3 from "aws-sdk/clients/s3";
 const {
@@ -43,7 +44,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
         {
           Bucket,
           Body: appImageFile,
-          Key: appImageFile.name,
+          Key: `${appImageFile.name}-${uuidv4()}`,
           ACL: "public-read",
         },
         (err, data) => {

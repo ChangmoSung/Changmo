@@ -20,6 +20,7 @@
 
     .appContainer {
       display: flex;
+      flex-flow: wrap;
       justify-content: space-between;
 
       .app {

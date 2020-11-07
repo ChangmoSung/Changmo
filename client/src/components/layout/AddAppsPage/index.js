@@ -21,6 +21,7 @@ const s3 = new S3({
 
 const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
   const formEl = useRef(null);
+  const [appAdded, toggleAppAdded] = useState(false);
   const [formData, setFormData] = useState({
     appName: "",
     appUrl: "",
@@ -57,6 +58,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
               fileUrl: data.Location,
             };
             addApps(formDataToSend);
+            toggleAppAdded(true);
           }
         }
       );
@@ -66,6 +68,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
   };
 
   if (!isAuthenticated) return <Redirect to="/" />;
+  if (appAdded) return <Redirect to="/mainPage" />;
 
   return (
     <div className="container addAppsPage">
@@ -90,6 +93,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
             type="file"
             name="appImageFile"
             onChange={(e) => onChange(e)}
+            required
           />
           <button>Add</button>
         </form>

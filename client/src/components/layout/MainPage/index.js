@@ -14,7 +14,9 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
 
   const [appInfo, setAppInfo] = useState({});
 
-  const onClick = (_id, fileName) => {
+  const onClick = (e, _id, fileName) => {
+    e.target.parentNode.classList.toggle("show");
+
     const answer = window.confirm(
       "Are you sure you want to permanently delete the app?"
     );
@@ -31,10 +33,12 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
       <div className="wrapper mainPageContainer">
         <h1>Welcome!</h1>
         <div className="appContainer">
-          {apps.map(({ _id, appName, fileUrl, fileName }, i) => (
+          {apps.map(({ _id, appName, appUrl, fileUrl, fileName }, i) => (
             <div key={i} className="app">
               <div className="appImage">
-                <img src={fileUrl} alt={appName} />
+                <a href={appUrl} rel="noopener noreferrer" target="_blank">
+                  <img src={fileUrl} alt={appName} />
+                </a>
                 <i
                   className="fas fa-cog"
                   onClick={(e) => e.target.nextSibling.classList.toggle("show")}
@@ -44,11 +48,13 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
                   }
                   tabIndex="0"
                 ></i>
-                <div className={`optionButtons ${!appInfo.appId && "hidden"}`}>
+                <div className="optionButtons">
                   <button onClick={() => setAppInfo({ appId: _id, fileName })}>
                     Edit
                   </button>
-                  <button onClick={() => onClick(_id, fileName)}>Remove</button>
+                  <button onClick={(e) => onClick(e, _id, fileName)}>
+                    Remove
+                  </button>
                 </div>
               </div>
               <p>{appName}</p>

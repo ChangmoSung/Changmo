@@ -15,16 +15,17 @@
 
     h1 {
       font-size: 4.5rem;
-      margin: 0 0 6rem;
+      margin: 0;
     }
 
     .appContainer {
       display: flex;
       flex-flow: wrap;
-      justify-content: space-between;
+      justify-content: flex-start;
 
       .app {
-        width: 25%;
+        width: 30%;
+        margin-top: 10rem;
 
         .appImage {
           position: relative;
@@ -71,6 +72,10 @@
           font-size: $primaryFontSize;
           text-align: center;
           line-height: 3rem;
+        }
+
+        &:nth-child(3n + 2) {
+          margin: 10rem 5% 0;
         }
       }
     }

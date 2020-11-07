@@ -58,7 +58,9 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
               fileUrl: data.Location,
             };
             addApps(formDataToSend);
-            toggleAppAdded(true);
+
+            const answer = window.confirm("Would you like to add more apps?");
+            if (!answer) toggleAppAdded(true);
           }
         }
       );

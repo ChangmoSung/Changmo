@@ -46,8 +46,28 @@
           }
 
           a {
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
             height: 22vmax;
+            transition: all 0.3s;
+
+            span {
+              position: absolute;
+              border: $primaryBorder;
+              border-radius: $primaryBorderRadius;
+              font-size: $primaryFontSize;
+              color: black;
+              padding: 13%;
+              background: white;
+              opacity: 0;
+            }
+
+            &:hover span,
+            &:focus span {
+              opacity: 1;
+            }
           }
 
           .optionButtons {

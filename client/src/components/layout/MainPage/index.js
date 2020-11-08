@@ -26,11 +26,11 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
     }
   };
 
-  const onMouseEvent = (e) =>
-    e.target.nextElementSibling.classList.toggle("animate__rubberBand");
+  const onMouseEvent = ({ currentTarget }) =>
+    currentTarget.lastChild.classList.toggle("animate__rubberBand");
 
-  const onFocusEvent = (e) =>
-    e.target.lastChild.classList.toggle("animate__rubberBand");
+  const onFocusEvent = ({ currentTarget }) =>
+    currentTarget.lastChild.classList.toggle("animate__rubberBand");
 
   if (!isAuthenticated) return <Redirect to="/" />;
 
@@ -48,13 +48,10 @@ const MainPage = ({ getApps, removeApps, apps, isAuthenticated }) => {
                   target="_blank"
                   onFocus={(e) => onFocusEvent(e)}
                   onBlur={(e) => onFocusEvent(e)}
+                  onMouseEnter={(e) => onMouseEvent(e)}
+                  onMouseLeave={(e) => onMouseEvent(e)}
                 >
-                  <img
-                    src={fileUrl}
-                    alt={appName}
-                    onMouseEnter={(e) => onMouseEvent(e)}
-                    onMouseLeave={(e) => onMouseEvent(e)}
-                  />
+                  <img src={fileUrl} alt={appName} />
                   <span className="animate__animated">Go to the app</span>
                 </a>
                 <i

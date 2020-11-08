@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { logout } from "../../../actions/auth";
 
-const NavBar = ({ user }) =>
+const NavBar = ({ user, logout }) =>
   user && (
     <nav>
       <ul className="wrapper">
@@ -16,16 +17,20 @@ const NavBar = ({ user }) =>
             <Link to="/addAppsPage">Add apps</Link>
           </li>
         )}
+        <li onClick={logout}>
+          <p>Log out</p>
+        </li>
       </ul>
     </nav>
   );
 
 NavBar.propTypes = {
   user: PropTypes.object,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { logout })(NavBar);

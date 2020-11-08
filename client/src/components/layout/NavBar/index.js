@@ -17,8 +17,12 @@ const NavBar = ({ user, logout }) =>
             <Link to="/addAppsPage">Add apps</Link>
           </li>
         )}
-        <li onClick={logout}>
-          <p>Log out</p>
+        <li
+          onClick={logout}
+          onKeyDown={({ keyCode }) => keyCode === 13 && logout()}
+          tabIndex="0"
+        >
+          Log out
         </li>
       </ul>
     </nav>

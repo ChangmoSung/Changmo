@@ -12,6 +12,10 @@ nav {
     font-size: $primaryFontSize;
     margin-top: 2rem;
 
+    li {
+      cursor: pointer;
+    }
+
     a {
       text-decoration: none;
       color: black;

@@ -5,6 +5,7 @@ import NavBar from "./components/layout/NavBar/index.js";
 import LandingPage from "./components/layout/LandingPage/index.js";
 import MainPage from "./components/layout/MainPage/index.js";
 import AddAppsPage from "./components/layout/AddAppsPage/index.js";
+import SignupPage from "./components/layout/SignupPage/index.js";
 
 import store from "./store";
 import { Provider } from "react-redux";
@@ -21,6 +22,7 @@ const App = () => {
         <NavBar />
         <Route exact path="/" component={LandingPage} />
         <Switch>
+          <Route exact path="/signup" component={SignupPage} />
           <Route exact path="/mainPage" component={MainPage} />
           <Route exact path="/addAppsPage" component={AddAppsPage} />
         </Switch>

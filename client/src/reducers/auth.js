@@ -3,6 +3,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAIL,
   LOGOUT,
 } from "../actions/types";
 
@@ -25,6 +27,7 @@ export default function (state = initialState, action) {
         user: payload,
       };
     case LOGIN_SUCCESS:
+    case SIGNUP_SUCCESS:
       localStorage.setItem("token", payload.token);
 
       return {
@@ -36,6 +39,7 @@ export default function (state = initialState, action) {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
+    case SIGNUP_FAIL:
       localStorage.removeItem("token");
 
       return {

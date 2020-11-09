@@ -1,0 +1,49 @@
+@import "../../styles/variables";
+
+.signupPage {
+  display: flex;
+  align-items: center;
+
+  .signupPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 5%;
+    margin-top: 8vmax;
+    border: $primaryBorder;
+    border-radius: $primaryBorderRadius;
+
+    h1 {
+      margin: 0;
+      font-size: 4.5rem;
+    }
+
+    p {
+      font-size: $primaryFontSize;
+      margin: 5rem 0;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      input {
+        margin-bottom: 2rem;
+        width: 100%;
+      }
+
+      .buttonContainer {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+
+        button {
+          width: 40%;
+        }
+      }
+    }
+  }
+}

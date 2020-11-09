@@ -11,8 +11,9 @@ const SignupPage = ({ signup, isAuthenticated }) => {
     email: "",
     password: "",
   });
-
   const { name, email, password } = formData;
+
+  const [goBack, toggleGoBack] = useState(false);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,6 +24,7 @@ const SignupPage = ({ signup, isAuthenticated }) => {
   };
 
   if (isAuthenticated) return <Redirect to="/mainPage" />;
+  if (goBack) return <Redirect to="/" />;
 
   return (
     <div className="container signupPage">
@@ -48,7 +50,12 @@ const SignupPage = ({ signup, isAuthenticated }) => {
             onChange={onChange}
             placeholder="Password"
           />
-          <button>Sign Up</button>
+          <div className="buttonContainer">
+            <button>Sign Up</button>
+            <button type="button" onClick={() => toggleGoBack(true)}>
+              Go back
+            </button>
+          </div>
         </form>
       </div>
     </div>

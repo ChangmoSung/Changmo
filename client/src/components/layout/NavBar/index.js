@@ -18,11 +18,21 @@ const NavBar = ({ user, logout }) =>
           </li>
         )}
         <li
-          onClick={logout}
-          onKeyDown={({ keyCode }) => keyCode === 13 && logout()}
+          onClick={() => {
+            const answer = window.confirm("Are you sure you want to sign out?");
+            if (answer) logout();
+          }}
+          onKeyDown={({ keyCode }) => {
+            if (keyCode === 13) {
+              const answer = window.confirm(
+                "Are you sure you want to sign out?"
+              );
+              if (answer) logout();
+            }
+          }}
           tabIndex="0"
         >
-          Log out
+          Sign out
         </li>
       </ul>
     </nav>

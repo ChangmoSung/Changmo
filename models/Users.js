@@ -20,5 +20,33 @@ module.exports = Users = mongoose.model(
       type: Date,
       default: Date.now,
     },
+    apps: [
+      {
+        appName: {
+          type: String,
+          required: true,
+          unique: true,
+        },
+        appUrl: {
+          type: String,
+          required: true,
+          unique: true,
+        },
+        fileName: {
+          type: String,
+          required: true,
+          unique: true,
+        },
+        fileUrl: {
+          type: String,
+          required: true,
+          unique: true,
+        },
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   })
 );

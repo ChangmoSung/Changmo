@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 import { addApps } from "../../../actions/apps";
+import { addPrivateApps } from "../../../actions/users";
 import S3 from "aws-sdk/clients/s3";
 const {
   REACT_APP_AWS_ACCESS_KEY_ID: accessKeyId,
@@ -19,13 +20,14 @@ const s3 = new S3({
   region,
 });
 
-const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
+const AddAppsPage = ({ user, addApps, addPrivateApps, isAuthenticated }) => {
   const formEl = useRef(null);
   const [goBack, toggleGoBack] = useState(false);
   const [formData, setFormData] = useState({
     appName: "",
     appUrl: "",
     appImageFile: "",
+    appType: "",
   });
   const { appImageFile } = formData;
 
@@ -52,12 +54,24 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
           if (err) {
             throw err;
           } else {
+            let type = formData.appType;
+            delete formData.appType;
+            delete formData.appImageFile;
+
             const formDataToSend = {
               ...formData,
               fileName: data.Key.split("/")[1],
               fileUrl: data.Location,
             };
-            addApps(formDataToSend);
+
+            if (type === "public") {
+              addApps(formDataToSend);
+            } else if (type === "private") {
+              addPrivateApps(formDataToSend);
+            } else {
+              addApps(formDataToSend);
+              addPrivateApps(formDataToSend);
+            }
 
             const answer = window.confirm("Would you like to add more apps?");
             if (!answer) toggleGoBack(true);
@@ -77,6 +91,27 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
       <div className="wrapper addAppsPageContainer">
         <h1>Would you like to add an app?</h1>
         <form ref={formEl} onSubmit={onSubmit}>
+          <input
+            type="radio"
+            name="appType"
+            value="public"
+            onChange={onChange}
+            required
+          />
+          <input
+            type="radio"
+            name="appType"
+            value="private"
+            onChange={onChange}
+            required
+          />
+          <input
+            type="radio"
+            name="appType"
+            value="publicAndPrivate"
+            onChange={onChange}
+            required
+          />
           <input
             type="text"
             name="appName"
@@ -112,6 +147,7 @@ const AddAppsPage = ({ user, addApps, isAuthenticated }) => {
 AddAppsPage.propTypes = {
   user: PropTypes.object.isRequired,
   addApps: PropTypes.func.isRequired,
+  addPrivateApps: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -120,4 +156,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { addApps })(AddAppsPage);
+export default connect(mapStateToProps, { addApps, addPrivateApps })(
+  AddAppsPage
+);

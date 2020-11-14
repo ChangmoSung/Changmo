@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
 const Users = require("../../models/Users");
@@ -55,5 +56,28 @@ router.post(
     }
   }
 );
+
+router.put("/", auth, async (req, res) => {
+  try {
+    const user = await Users.findById(req.user.id).select("-password");
+
+    const { appName = "", appUrl = "", fileName = "", fileUrl = "" } = req.body;
+    const app = {};
+
+    if (appName) app.appName = appName;
+    if (appUrl) app.appUrl = appUrl;
+    if (fileName) app.fileName = fileName;
+    if (fileUrl) app.fileUrl = fileUrl;
+
+    user.apps.push(app);
+
+    await user.save();
+
+    res.json(user);
+  } catch ({ message = "", reason = "" }) {
+    console.error(message || reason);
+    res.status(500).send("Server error");
+  }
+});
 
 module.exports = router;

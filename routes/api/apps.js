@@ -30,7 +30,7 @@ router.post(
     try {
     } catch ({ message = "", reason = "" }) {
       console.error("Apps router /", message || reason);
-      res.status(500).send("Server error - users router");
+      res.status(500).send({ message, reason });
     }
   }
 );
@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
     res.json(apps);
   } catch ({ message = "", reason = "" }) {
     console.error(message || reason);
-    res.status(500).send("Server error");
+    res.status(500).send({ message, reason });
   }
 });
 
@@ -60,7 +60,7 @@ router.put("/:id", async (req, res) => {
     res.json(app);
   } catch ({ message = "", reason = "" }) {
     console.error(message || reason);
-    res.status(500).send("Server error");
+    res.status(500).send({ message, reason });
   }
 });
 
@@ -68,14 +68,14 @@ router.delete("/:id", async (req, res) => {
   try {
     const app = await Apps.findById(req.params.id);
 
-    if (!app) res.status(404).json({ msg: "Post not found" });
+    if (!app) res.status(404).json({ msg: "App not found" });
 
     await app.remove();
 
     res.json({ msg: "App removed" });
   } catch ({ message = "", reason = "" }) {
     console.error(message || reason);
-    res.status(500).send("Server error");
+    res.status(500).send({ message, reason });
   }
 });
 

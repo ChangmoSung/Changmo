@@ -78,10 +78,11 @@ const AddAppsPage = ({
               addApps(formDataToSend);
               addPrivateApps(formDataToSend);
             }
-            if (error.msg) alert("App name and url have to be unique :)");
+
+            if (error.message) alert("App name and url have to be unique :)");
 
             const answer = window.confirm("Would you like to add more apps?");
-            if (!answer && !error.msg) toggleGoBack(true);
+            if (!answer && !error.message) toggleGoBack(true);
           }
         }
       );

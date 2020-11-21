@@ -12,10 +12,15 @@ export const getApps = () => async (dispatch) => {
     const res = await axios.get("/apps");
 
     dispatch({ type: GET_APPS, payload: res.data });
-  } catch (err) {
+  } catch ({ response = {}, reason = "", message = "" }) {
     dispatch({
       type: APPS_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: response.statusText,
+        status: response.status,
+        reason,
+        message,
+      },
     });
   }
 };
@@ -31,10 +36,15 @@ export const addApps = (formData) => async (dispatch) => {
     const res = await axios.post("/apps", formData, config);
 
     dispatch({ type: ADD_APPS, payload: res.data });
-  } catch (err) {
+  } catch ({ response = {}, reason = "", message = "" }) {
     dispatch({
       type: APPS_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: response.statusText,
+        status: response.status,
+        reason,
+        message,
+      },
     });
   }
 };
@@ -50,10 +60,15 @@ export const updateApps = (appId, formData) => async (dispatch) => {
     const res = await axios.put(`/apps/${appId}`, formData, config);
 
     dispatch({ type: UPDATE_APPS, payload: res.data });
-  } catch (err) {
+  } catch ({ response = {}, reason = "", message = "" }) {
     dispatch({
       type: APPS_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: response.statusText,
+        status: response.status,
+        reason,
+        message,
+      },
     });
   }
 };
@@ -63,10 +78,15 @@ export const removeApps = (appId) => async (dispatch) => {
     await axios.delete(`/apps/${appId}`);
 
     dispatch({ type: REMOVE_APPS, payload: appId });
-  } catch (err) {
+  } catch ({ response = {}, reason = "", message = "" }) {
     dispatch({
       type: APPS_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: response.statusText,
+        status: response.status,
+        reason,
+        message,
+      },
     });
   }
 };

@@ -23,6 +23,17 @@
       flex-direction: column;
       align-items: center;
 
+      .radioButtoncontainer {
+        width: 30%;
+        display: flex;
+        font-size: $primaryFontSize;
+
+        label,
+        input {
+          width: 50%;
+        }
+      }
+
       input {
         width: 100%;
         margin-bottom: 5rem;

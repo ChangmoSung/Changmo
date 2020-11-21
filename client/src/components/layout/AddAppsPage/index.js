@@ -20,7 +20,13 @@ const s3 = new S3({
   region,
 });
 
-const AddAppsPage = ({ user, addApps, addPrivateApps, isAuthenticated }) => {
+const AddAppsPage = ({
+  user,
+  addApps,
+  addPrivateApps,
+  isAuthenticated,
+  error,
+}) => {
   const formEl = useRef(null);
   const [goBack, toggleGoBack] = useState(false);
   const [formData, setFormData] = useState({
@@ -72,9 +78,10 @@ const AddAppsPage = ({ user, addApps, addPrivateApps, isAuthenticated }) => {
               addApps(formDataToSend);
               addPrivateApps(formDataToSend);
             }
+            if (error.msg) alert("App name and url have to be unique :)");
 
             const answer = window.confirm("Would you like to add more apps?");
-            if (!answer) toggleGoBack(true);
+            if (!answer && !error.msg) toggleGoBack(true);
           }
         }
       );
@@ -91,27 +98,36 @@ const AddAppsPage = ({ user, addApps, addPrivateApps, isAuthenticated }) => {
       <div className="wrapper addAppsPageContainer">
         <h1>Would you like to add an app?</h1>
         <form ref={formEl} onSubmit={onSubmit}>
-          <input
-            type="radio"
-            name="appType"
-            value="public"
-            onChange={onChange}
-            required
-          />
-          <input
-            type="radio"
-            name="appType"
-            value="private"
-            onChange={onChange}
-            required
-          />
-          <input
-            type="radio"
-            name="appType"
-            value="publicAndPrivate"
-            onChange={onChange}
-            required
-          />
+          <div className="radioButtoncontainer">
+            <label>Public</label>
+            <input
+              type="radio"
+              name="appType"
+              value="public"
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="radioButtoncontainer">
+            <label>Private</label>
+            <input
+              type="radio"
+              name="appType"
+              value="private"
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="radioButtoncontainer">
+            <label>Both</label>
+            <input
+              type="radio"
+              name="appType"
+              value="publicAndPrivate"
+              onChange={onChange}
+              required
+            />
+          </div>
           <input
             type="text"
             name="appName"
@@ -149,11 +165,13 @@ AddAppsPage.propTypes = {
   addApps: PropTypes.func.isRequired,
   addPrivateApps: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  error: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
+  error: state.apps.error,
 });
 
 export default connect(mapStateToProps, { addApps, addPrivateApps })(
